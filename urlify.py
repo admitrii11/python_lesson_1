@@ -3,13 +3,16 @@ def urlify(text: list[str]) -> int:
     fast = slow = space_counter = 0
 
     while fast < len(text):
+      if text[fast] == '':
+        break
       if text[fast] == ' ':
         space_counter += 1
       fast += 1
 
+    del text[fast:]
     text.extend([''] * (space_counter)*2)
 
-    slow = len(text) - 1
+    slow = fast + (space_counter*2) - 1
     fast -= 1
 
     while fast >= 0:
@@ -29,11 +32,15 @@ def urlify(text: list[str]) -> int:
     print(text)
     return len(text)
 
-
 #Тесты
 
-
 text = list('my url')
+new_len = urlify(text)
+
+assert new_len == 8
+assert text[:new_len] == list('my%20url')
+
+text = list('my url') + [''] * 21
 new_len = urlify(text)
 
 assert new_len == 8
