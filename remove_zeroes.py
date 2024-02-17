@@ -1,5 +1,4 @@
 def remove_zeroes(numbers: list[int]) -> int:
-    """Переносим все 0 конец и возвращаем индекс первого нуля"""
     fast = slow = zero_counter = 0
 
     while fast < len(numbers):
